@@ -3,208 +3,325 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>NEURAL CAPSULE // 2026</title>
+<title>TEMPORAL ARCHIVE // 2026</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;600&display=swap" rel="stylesheet">
 
 <style>
   :root {
+    --cobalt: #0047ab;
     --neon-blue: #00f3ff;
-    --neon-pink: #ff00ff;
-    --dark-bg: #050505;
-    --glass: rgba(255, 255, 255, 0.05);
+    --warning-orange: #ff9d00;
+    --deep-space: #020205;
   }
 
   body {
-    background-color: var(--dark-bg);
-    background-image: radial-gradient(circle at 50% 50%, #1a1a2e 0%, #050505 100%);
+    background-color: var(--deep-space);
+    background-image: 
+      linear-gradient(rgba(0, 243, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(90px, rgba(0, 243, 255, 0.05) 1px, transparent 1px);
+    background-size: 50px 50px;
     color: #e0e0e0;
     font-family: 'Rajdhani', sans-serif;
     margin: 0;
+    line-height: 1.6;
   }
 
-  .container { max-width: 1000px; margin: 40px auto; padding: 0 20px; }
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 20px;
+  }
+
+  /* Header Section */
+  header {
+    text-align: center;
+    border: 2px solid var(--neon-blue);
+    padding: 20px;
+    background: rgba(0, 71, 171, 0.1);
+    box-shadow: 0 0 20px rgba(0, 243, 255, 0.2);
+    margin-bottom: 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 2px;
+    background: var(--neon-blue);
+    animation: scan 3s linear infinite;
+  }
+
+  @keyframes scan {
+    0% { top: 0; }
+    100% { top: 100%; }
+  }
 
   h1 {
     font-family: 'Orbitron', sans-serif;
-    text-align: center;
-    font-size: 3em;
+    font-size: 3.5em;
+    margin: 0;
+    letter-spacing: 8px;
     color: var(--neon-blue);
-    text-shadow: 0 0 15px var(--neon-blue);
-    margin-bottom: 0;
+    text-shadow: 0 0 10px var(--neon-blue);
   }
 
-  .glitch-text {
-    text-align: center;
-    color: var(--neon-pink);
-    font-weight: bold;
-    letter-spacing: 5px;
-    margin-bottom: 30px;
+  .status-bar {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.8em;
+    color: var(--warning-orange);
+    margin-top: 10px;
+  }
+
+  /* Image Styling */
+  .hero-frame {
+    border: 1px solid var(--neon-blue);
+    padding: 10px;
+    margin-bottom: 50px;
+    background: rgba(255,255,255,0.02);
   }
 
   .responsive-img {
     width: 100%;
-    max-height: 350px;
-    object-fit: cover;
-    border: 1px solid var(--neon-blue);
-    box-shadow: 0 0 20px rgba(0, 243, 255, 0.3);
-    margin-bottom: 40px;
+    display: block;
+    filter: sepia(0.5) hue-rotate(180deg) brightness(0.8);
+    border-radius: 2px;
   }
 
-  .form-box {
-    background: var(--glass);
-    border: 1px solid var(--neon-blue);
-    padding: 25px;
-    margin-bottom: 50px;
-    backdrop-filter: blur(5px);
-  }
-
-  input, textarea {
-    background: rgba(0,0,0,0.7);
-    border: 1px solid var(--neon-pink);
-    color: white;
-    padding: 12px;
-    margin: 10px 0;
-    width: 100%;
-    box-sizing: border-box;
-    font-family: 'Rajdhani';
-  }
-
-  button {
-    background: var(--neon-blue);
-    color: black;
-    padding: 15px;
-    width: 100%;
-    font-family: 'Orbitron';
-    font-weight: bold;
-    cursor: pointer;
-    border: none;
-    text-transform: uppercase;
-  }
-
-  h2 { font-family: 'Orbitron'; color: var(--neon-blue); border-bottom: 2px solid var(--neon-blue); padding-bottom: 10px; margin-top: 50px;}
-
-  .quotes-list {
+  /* Grid Styling */
+  .archive-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
   }
 
-  .quote-box {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(0, 243, 255, 0.3);
+  .log-entry {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(0, 243, 255, 0.2);
+    padding: 25px;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+
+  .log-entry:hover {
+    background: rgba(0, 243, 255, 0.05);
+    border-color: var(--neon-blue);
+    transform: scale(1.02);
+  }
+
+  .log-entry::before {
+    content: "LOG_DATA";
+    position: absolute;
+    top: -10px; left: 10px;
+    background: var(--deep-space);
+    color: var(--neon-blue);
+    font-size: 0.7em;
+    font-family: 'Orbitron';
+    padding: 0 5px;
+  }
+
+  .message {
+    font-size: 1.2em;
+    margin-bottom: 15px;
+    font-weight: 300;
+  }
+
+  .sender {
+    color: var(--warning-orange);
+    font-family: 'Orbitron';
+    font-size: 0.8em;
+    text-align: right;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  footer {
+    text-align: center;
+    margin-top: 100px;
     padding: 20px;
-    transition: 0.3s;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    border-top: 1px solid rgba(0, 243, 255, 0.2);
+    color: #555;
+    font-size: 0.9em;
   }
-
-  .quote-box:hover { border-color: var(--neon-pink); background: rgba(255, 0, 255, 0.05); }
-
-  .author { color: var(--neon-blue); text-align: right; font-weight: bold; margin-top: 15px; font-family: 'Orbitron'; font-size: 0.8em; }
-
-  footer { text-align: center; padding: 40px; color: #444; font-size: 0.8em; }
 </style>
 </head>
 
 <body>
 
 <div class="container">
-  <h1>NEURAL CAPSULE</h1>
-  <div class="glitch-text">SYNCING_CORE_ARCHIVE...</div>
+  <header>
+    <h1>ARCHIVE_2026</h1>
+    <div class="status-bar">SYSTEM_OWNER: ETHAN_FRANCIS_CHAN // TIMELINE_LOCKED</div>
+  </header>
 
-  <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80" alt="Cyber Grid" class="responsive-img">
-
-  <div class="form-box">
-    <h3 style="margin-top:0; color:var(--neon-pink)">> NEW_ENTRY_INITIALIZED</h3>
-    <input type="text" id="userName" placeholder="SUBJECT_IDENTIFIER">
-    <textarea id="userMessage" rows="3" placeholder="TRANSMIT_DATA_TO_2026..."></textarea>
-    <button id="submitBtn">EXECUTE UPLOAD</button>
+  <div class="hero-frame">
+    <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80" alt="Space Interface" class="responsive-img">
   </div>
 
-  <h2>// NEURAL_STREAM (LIVE_DATABASE)</h2>
-  <div class="quotes-list" id="capsuleGrid">
+  <div class="archive-grid">
+
+    <div class="log-entry">
+      <div class="message">"Life isn’t about waiting for the storm to pass; it’s about learning to dance in the rain."</div>
+      <div class="sender">// ETHAN CHAN (CREATOR)</div>
     </div>
 
-  <h2>// LEGACY_ARCHIVE (ORIGINAL_TIMELINE)</h2>
-  <div class="quotes-list">
-    <div class="quote-box"><p>"Life isn’t about waiting for the storm to pass..."</p><p class="author">— Ethan Chan (Creator)</p></div>
-    <div class="quote-box"><p>"Be grateful, your everyday life is someone's dream life."</p><p class="author">— Adishree Shiloh</p></div>
-    <div class="quote-box"><p>"I love Austin."</p><p class="author">— Max Mercado</p></div>
-    <div class="quote-box"><p>"I like turtles."</p><p class="author">— Alexis Blanche</p></div>
-    <div class="quote-box"><p>"Let go and let God 💕"</p><p class="author">— Ica Guerrero</p></div>
-    <div class="quote-box"><p>"Paint your own picture, and don't be thrown off course by others 💞"</p><p class="author">— Eiunice Arca</p></div>
-    <div class="quote-box"><p>"I like boys"</p><p class="author">— Ramon Lacno</p></div>
-    <div class="quote-box"><p>"Everything is Everywhere"</p><p class="author">— Nino Roque</p></div>
-    <div class="quote-box"><p>"Life is Short. Spoil your Day"</p><p class="author">— Mertyl Ancajas</p></div>
-    <div class="quote-box"><p>"Money is power. Toni Fowler oh yeah!"</p><p class="author">— Alexander Templado</p></div>
-    <div class="quote-box"><p>"Eat 15 chicken nuggets today"</p><p class="author">— Haamiah Osmena</p></div>
-    <div class="quote-box"><p>"Be grateful"</p><p class="author">— Audrey Lagumbay</p></div>
-    <div class="quote-box"><p>"It always seems impossible until its done"</p><p class="author">— Yohann Celocia</p></div>
-    <div class="quote-box"><p>"The only way to do great work is to love what you do"</p><p class="author">— Lyxie Reble</p></div>
-    <div class="quote-box"><p>"Take chances, make mistakes. Stay positive, keep moving."</p><p class="author">— Shantelle Ruta</p></div>
-    <div class="quote-box"><p>"It wont happen in a hour, but if you quit it wont happen at all"</p><p class="author">— Shan Brione</p></div>
-    <div class="quote-box"><p>"If I call while I charge then my battery will die..."</p><p class="author">— Yuie Edillo</p></div>
-    <div class="quote-box"><p>"They boiled a dog and fed it to a child"</p><p class="author">— Sheng Hopida</p></div>
-    <div class="quote-box"><p>"Yeah IDK"</p><p class="author">— Rob Maglasang</p></div>
-    <div class="quote-box"><p>"Whats App!"</p><p class="author">— Le Mabulay</p></div>
-    <div class="quote-box"><p>"Pray, Hope, and Don't worry"</p><p class="author">— Jazmin Albar</p></div>
-    <div class="quote-box"><p>"You can never change fate..."</p><p class="author">— Brent Equibal</p></div>
-    <div class="quote-box"><p>"Every cloud has a silver lining"</p><p class="author">— Martina Modina</p></div>
-    <div class="quote-box"><p>"Whatever you do, just make sure it makes you happy"</p><p class="author">— Erlaine Gumapon</p></div>
-    <div class="quote-box"><p>"Every effort you make, marks a sharper version of you"</p><p class="author">— Angelicah</p></div>
-    <div class="quote-box"><p>"Green Apple"</p><p class="author">— Blair Pahner</p></div>
-    <div class="quote-box"><p>"The past is history, the future is a mystery..."</p><p class="author">— Jasmine Catalan</p></div>
-    <div class="quote-box"><p>"Where did Odin get his gun?"</p><p class="author">— Manuel Felipe</p></div>
-    <div class="quote-box"><p>"One larp two larp red larp blue larp"</p><p class="author">— Gabby Arevalo</p></div>
-    <div class="quote-box"><p>"Dont be angry to anyone and be kind to everyone"</p><p class="author">— Francis Jamboy</p></div>
-    <div class="quote-box"><p>"What is gone is still there..."</p><p class="author">— Nikolai Bael</p></div>
+    <div class="log-entry">
+      <div class="message">"Be grateful, your everyday life is someone's dream life."</div>
+      <div class="sender">// ADISHREE SHILOH</div>
+    </div>
+
+    <div class="log-entry">
+      <div class="message">"I love Austin."</div>
+      <div class="sender">// MAX MERCADO</div>
+    </div>
+
+    <div class="log-entry">
+      <div class="message">"I like turtles."</div>
+      <div class="sender">// ALEXIS BLANCHE</div>
+    </div>
+
+    <div class="log-entry">
+      <div class="message">"Let go and let God 💕"</div>
+      <div class="sender">// ICA GUERRERO</div>
+    </div>
+
+    <div class="log-entry">
+      <div class="message">"Paint your own picture, and don't be thrown off course by others 💞"</div>
+      <div class="sender">// EIUNICE ARCA</div>
+    </div>
+
+    <div class="log-entry">
+      <div class="message">"I like boys"</div>
+      <div class="sender">// RAMON LACNO</div>
+    </div>
+
+    <div class="log-entry">
+      <div class="message">"Everything is Everywhere"</div>
+      <div class="sender">// NINO ROQUE</div>
+    </div>
+
+    <div class="log-entry">
+      <div class="message">"Life is Short. Spoil your Day"</div>
+      <div class="sender">// MERTYL ANCAJAS</div>
+    </div>
+
+    <div class="log-entry">
+      <div class="message">"Money is power. Toni Fowler oh yeah!"</div>
+      <div class="sender">// ALEXANDER TEMPLADO</div>
+    </div>
+
+    <div class="log-entry">
+      <div class="message">"Eat 15 chicken nuggets today"</div>
+      <div class="sender">// HAAMIAH OSMENA</div>
+    </div>
+
+    <div class="log-entry">
+      <div class="message">"Be grateful"</div>
+      <div class="sender">// AUDREY LAGUMBAY</div>
+    </div>
+
+    <div class="log-entry">
+      <div class="message">"It always seems impossible until its done"</div>
+      <div class="sender">// YOHANN CELOCIA</div>
+    </div>
+
+    <div class="log-entry">
+      <div class="message">"The only way to do great work is to love what you do"</div>
+      <div class="sender">// LYXIE REBLE</div>
+    </div>
+
+    <div class="log-entry">
+      <div class="message">"Take chances, make mistakes. Stay positive, keep moving."</div>
+      <div class="sender">// SHANTELLE RUTA</div>
+    </div>
+
+    <div class="log-entry">
+      <div class="message">"It wont happen in a hour, but if you quit it wont happen at all"</div>
+      <div class="sender">// SHAN BRIONE</div>
+    </div>
+
+    <div class="log-entry">
+      <div class="message">"If I call while I charge then my battery will die..."</div>
+      <div class="sender">// YUIE EDILLO</div>
+    </div>
+
+    <div class="log-entry">
+      <div class="message">"They boiled a dog and fed it to a child"</div>
+      <div class="sender">// SHENG HOPIDA</div>
+    </div>
+
+    <div class="log-entry">
+      <div class="message">"Yeah IDK"</div>
+      <div class="sender">// ROB MAGLASANG</div>
+    </div>
+
+    <div class="log-entry">
+      <div class="message">"Whats App!"</div>
+      <div class="sender">// LE MABULAY</div>
+    </div>
+
+    <div class="log-entry">
+      <div class="message">"Pray, Hope, and Don't worry"</div>
+      <div class="sender">// JAZMIN ALBAR</div>
+    </div>
+
+    <div class="log-entry">
+      <div class="message">"You can never change fate..."</div>
+      <div class="sender">// BRENT EQUIBAL</div>
+    </div>
+
+    <div class="log-entry">
+      <div class="message">"Every cloud has a silver lining"</div>
+      <div class="sender">// MARTINA MODINA</div>
+    </div>
+
+    <div class="log-entry">
+      <div class="message">"Whatever you do, just make sure it makes you happy"</div>
+      <div class="sender">// ERLAINE GUMAPON</div>
+    </div>
+
+    <div class="log-entry">
+      <div class="message">"Every effort you make, marks a sharper version of you"</div>
+      <div class="sender">// ANGELICAH</div>
+    </div>
+
+    <div class="log-entry">
+      <div class="message">"Green Apple"</div>
+      <div class="sender">// BLAIR PAHNER</div>
+    </div>
+
+    <div class="log-entry">
+      <div class="message">"The past is history, the future is a mystery..."</div>
+      <div class="sender">// JASMINE CATALAN</div>
+    </div>
+
+    <div class="log-entry">
+      <div class="message">"Where did Odin get his gun?"</div>
+      <div class="sender">// MANUEL FELIPE</div>
+    </div>
+
+    <div class="log-entry">
+      <div class="message">"One larp two larp red larp blue larp"</div>
+      <div class="sender">// GABBY AREVALO</div>
+    </div>
+
+    <div class="log-entry">
+      <div class="message">"Dont be angry to anyone and be kind to everyone"</div>
+      <div class="sender">// FRANCIS JAMBOY</div>
+    </div>
+
+    <div class="log-entry">
+      <div class="message">"What is gone is still there..."</div>
+      <div class="sender">// NIKOLAI BAEL</div>
+    </div>
+
   </div>
 
-  <footer>SYSTEM_LOG: ETHAN_FRANCIS_CHAN // 2026_TIME_CAPSULE</footer>
+  <footer>
+    TEMPORAL_STAMP: 2026.02.28 // ARCHIVE_COMPLETE
+  </footer>
 </div>
 
-<script>
-  // YOUR SUPABASE CONNECTION
-  const SUPABASE_URL = 'https://cxlpzigjihsmpxeaovrp.supabase.co'; 
-  const SUPABASE_KEY = 'PASTE_YOUR_ANON_KEY_HERE'; 
-  const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
-  const grid = document.getElementById('capsuleGrid');
-  const btn = document.getElementById('submitBtn');
-
-  async function fetchMessages() {
-    const { data, error } = await supabaseClient.from('messages').select('*').order('created_at', { ascending: false });
-    if (!error) {
-      grid.innerHTML = ''; 
-      data.forEach(row => {
-        const box = document.createElement('div');
-        box.className = 'quote-box';
-        box.innerHTML = `<p>${row.message}</p><div class="author">// ID: ${row.name}</div>`;
-        grid.appendChild(box);
-      });
-    }
-  }
-
-  btn.addEventListener('click', async () => {
-    const name = document.getElementById('userName').value;
-    const message = document.getElementById('userMessage').value;
-    if (!name || !message) return alert("ERROR: NULL_DATA");
-
-    btn.innerText = "UPLOADING...";
-    const { error } = await supabaseClient.from('messages').insert([{ name, message }]);
-    if (error) alert("CRITICAL_FAILURE: " + error.message);
-    else {
-      document.getElementById('userName').value = '';
-      document.getElementById('userMessage').value = '';
-      fetchMessages(); 
-    }
-    btn.innerText = "EXECUTE UPLOAD";
-  });
-
-  fetchMessages();
-</script>
 </body>
 </html>
