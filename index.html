@@ -56,7 +56,7 @@
     margin-bottom: 25px;
   }
 
-  /* --- FORM STYLING --- */
+  /* Form Styling */
   .form-box {
     background: #ffffff;
     border-radius: 15px;
@@ -66,57 +66,27 @@
     border: 2px solid #4b6cb7;
   }
 
-  .form-box h2 {
-    margin-top: 0;
-    color: #4b6cb7;
-    text-align: center;
-  }
-
-  .form-group {
-    margin-bottom: 15px;
-  }
-
-  label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #4b6cb7;
-  }
-
   input, textarea {
     width: 100%;
     padding: 12px;
+    margin: 10px 0;
     border: 1px solid #ddd;
     border-radius: 8px;
-    box-sizing: border-box; /* Important for responsive width */
-    font-size: 1em;
+    box-sizing: border-box;
   }
 
   button {
     background: #4b6cb7;
     color: white;
-    padding: 12px 25px;
+    padding: 12px;
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    font-size: 1.1em;
     width: 100%;
-    transition: background 0.3s;
+    font-weight: bold;
   }
 
-  button:hover {
-    background: #365091;
-  }
-
-  /* --- EXISTING STYLES --- */
-  .section-box {
-    background: #f1f5f9;
-    border-radius: 15px;
-    padding: 20px;
-    margin-bottom: 30px;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
-  }
-
+  /* Grid Styling */
   .quotes-list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -137,14 +107,13 @@
   .quote-text { color: #555; font-size: 1.05em; }
   .author { text-align: right; font-weight: bold; color: #4b6cb7; margin-top: 15px; }
 
-  footer { text-align: center; margin-top: 40px; padding-bottom: 40px; font-size: 0.9em; color: #555; }
+  footer { text-align: center; margin-top: 40px; padding-bottom: 40px; color: #555; }
 </style>
 </head>
 
 <body>
 
 <div class="container">
-
   <h1>2026 Time Capsule (BETA)</h1>
   <div class="creator">Creator: <strong>Ethan Francis Chan</strong></div>
 
@@ -152,20 +121,9 @@
 
   <div class="form-box">
     <h2>Add Your Message</h2>
-    <div class="form-group">
-      <label for="userName">Your Name</label>
-      <input type="text" id="userName" placeholder="Enter your name...">
-    </div>
-    <div class="form-group">
-      <label for="userMessage">Your Message</label>
-      <textarea id="userMessage" rows="3" placeholder="Write something for the future..."></textarea>
-    </div>
+    <input type="text" id="userName" placeholder="Your Name">
+    <textarea id="userMessage" rows="3" placeholder="Message for the future..."></textarea>
     <button onclick="addMessage()">Submit to Capsule</button>
-  </div>
-
-  <div class="section-box">
-    <h2>Testers</h2>
-    <p>Adishree Shiloh | Alexis Blanche | Max Mercado</p>
   </div>
 
   <div class="quotes-list" id="capsuleGrid">
@@ -173,44 +131,54 @@
     <div class="quote-box"><p class="quote-text">"Be grateful, your everyday life is someone's dream life."</p><p class="author">— Adishree Shiloh(Tester)</p></div>
     <div class="quote-box"><p class="quote-text">"I love Austin."</p><p class="author">— Max Mercado(Tester)</p></div>
     <div class="quote-box"><p class="quote-text">"I like turtles."</p><p class="author">— Alexis Blanche(Tester)</p></div>
-    </div>
+    <div class="quote-box"><p class="quote-text">"Let go and let God 💕"</p><p class="author">— Ica Guerrero</p></div>
+    <div class="quote-box"><p class="quote-text">"Paint your own picture, and don't be thrown off course by others 💞💞💞"</p><p class="author">— Eiunice Arca</p></div>
+    <div class="quote-box"><p class="quote-text">"I like boys"</p><p class="author">— Ramon Lacno</p></div>
+    <div class="quote-box"><p class="quote-text">"Everything is Everywhere"</p><p class="author">— Nino Roque</p></div>
+    <div class="quote-box"><p class="quote-text">"Life is Short. Spoil your Day"</p><p class="author">— Mertyl Ancajas</p></div>
+    <div class="quote-box"><p class="quote-text">"Money is power. Toni Fowler oh yeah!"</p><p class="author">— Alexander Templado</p></div>
+    <div class="quote-box"><p class="quote-text">"Eat 15 chicken nuggets today"</p><p class="author">— Haamiah Osmena</p></div>
+    <div class="quote-box"><p class="quote-text">"Be grateful"</p><p class="author">— Audrey Lagumbay</p></div>
+    <div class="quote-box"><p class="quote-text">"It always seems impossible until its done"</p><p class="author">— Yohann Celocia</p></div>
+    <div class="quote-box"><p class="quote-text">"The only way to do great work is to love what you do"</p><p class="author">— Lyxie Reble</p></div>
+    <div class="quote-box"><p class="quote-text">"Take chances, make mistakes."</p><p class="author">— Shantelle Ruta</p></div>
+    <div class="quote-box"><p class="quote-text">"It wont happen in a hour, but if you quit it wont happen at all"</p><p class="author">— Shan Brione</p></div>
+    <div class="quote-box"><p class="quote-text">"If I call while I charge then my battery will die"</p><p class="author">— Yuie Edillo</p></div>
+    <div class="quote-box"><p class="quote-text">"They boiled a dog and fed it to a child"</p><p class="author">— Sheng Hopida</p></div>
+    <div class="quote-box"><p class="quote-text">"Yeah IDK"</p><p class="author">— Rob Maglasang</p></div>
+    <div class="quote-box"><p class="quote-text">"Whats App!"</p><p class="author">— Le Mabulay</p></div>
+    <div class="quote-box"><p class="quote-text">"Pray, Hope, and Don't worry"</p><p class="author">— Jazmin Albar</p></div>
+    <div class="quote-box"><p class="quote-text">"You can never change fate..."</p><p class="author">— Brent Equibal</p></div>
+    <div class="quote-box"><p class="quote-text">"Every cloud has a silver lining"</p><p class="author">— Martina Modina</p></div>
+    <div class="quote-box"><p class="quote-text">"Whatever you do, just make sure it makes you happy"</p><p class="author">— Erlaine Gumapon</p></div>
+    <div class="quote-box"><p class="quote-text">"Every effort you make, marks a sharper version of you"</p><p class="author">— Angelicah</p></div>
+    <div class="quote-box"><p class="quote-text">"Green Apple"</p><p class="author">— Blair Pahner</p></div>
+    <div class="quote-box"><p class="quote-text">"The past is history, the future is a mystery..."</p><p class="author">— Jasmine Catalan</p></div>
+    <div class="quote-box"><p class="quote-text">"Where did Odin get his gun?"</p><p class="author">— Manuel Felipe</p></div>
+    <div class="quote-box"><p class="quote-text">"One larp two larp red larp blue larp"</p><p class="author">— Gabby Arevalo</p></div>
+    <div class="quote-box"><p class="quote-text">"Dont be angry to anyone and be kind to everyone"</p><p class="author">— Francis Jamboy</p></div>
+    <div class="quote-box"><p class="quote-text">"What is gone is still there..."</p><p class="author">— Nikolai Bael</p></div>
+  </div>
 
-  <footer>
-    Created by <strong>Ethan Francis Chan</strong> • 2026 Time Capsule Project
-  </footer>
-
+  <footer>Created by Ethan Francis Chan • 2026 Time Capsule</footer>
 </div>
 
 <script>
   function addMessage() {
     const name = document.getElementById('userName').value;
     const message = document.getElementById('userMessage').value;
+    if (!name || !message) return alert("Fill everything!");
 
-    if (name === "" || message === "") {
-      alert("Please fill in both fields!");
-      return;
-    }
-
-    // Create the new quote box element
     const newBox = document.createElement('div');
     newBox.className = 'quote-box';
-    newBox.innerHTML = `
-      <p class="quote-text">"${message}"</p>
-      <p class="author">— ${name}</p>
-    `;
-
-    // Add it to the top of the grid
+    newBox.innerHTML = `<p class="quote-text">"${message}"</p><p class="author">— ${name}</p>`;
+    
     const grid = document.getElementById('capsuleGrid');
     grid.insertBefore(newBox, grid.firstChild);
-
-    // Clear the form
+    
     document.getElementById('userName').value = "";
     document.getElementById('userMessage').value = "";
-
-    // Smooth scroll to the new message
-    newBox.scrollIntoView({ behavior: 'smooth' });
   }
 </script>
-
 </body>
 </html>
