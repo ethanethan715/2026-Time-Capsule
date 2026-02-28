@@ -1,3 +1,4 @@
+HTML
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +13,6 @@
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    /* This background is already responsive via 'background-size: cover' */
     background: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1350&q=80') no-repeat center center fixed;
     background-size: cover;
     color: #333;
@@ -32,13 +32,12 @@
     padding: 0 20px;
   }
 
-  /* --- NEW RESPONSIVE IMAGE CLASS --- */
   .responsive-img {
     max-width: 100%;
     height: auto;
     border-radius: 15px;
     box-shadow: 0 6px 15px rgba(0,0,0,0.1);
-    margin: 20px 0;
+    margin: 0 auto 30px auto;
     display: block;
   }
 
@@ -58,23 +57,65 @@
     margin-bottom: 25px;
   }
 
-  .description {
-    text-align: center;
-    color: #555;
-    margin-bottom: 30px;
+  /* --- FORM STYLING --- */
+  .form-box {
+    background: #ffffff;
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 40px;
+    box-shadow: 0 8px 25px rgba(75, 108, 183, 0.2);
+    border: 2px solid #4b6cb7;
   }
 
+  .form-box h2 {
+    margin-top: 0;
+    color: #4b6cb7;
+    text-align: center;
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #4b6cb7;
+  }
+
+  input, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-sizing: border-box; /* Important for responsive width */
+    font-size: 1em;
+  }
+
+  button {
+    background: #4b6cb7;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1em;
+    width: 100%;
+    transition: background 0.3s;
+  }
+
+  button:hover {
+    background: #365091;
+  }
+
+  /* --- EXISTING STYLES --- */
   .section-box {
     background: #f1f5f9;
     border-radius: 15px;
     padding: 20px;
     margin-bottom: 30px;
     box-shadow: 0 6px 15px rgba(0,0,0,0.1);
-  }
-
-  .section-box h2 {
-    color: #4b6cb7;
-    margin-top: 0;
   }
 
   .quotes-list {
@@ -94,25 +135,10 @@
     justify-content: space-between;
   }
 
-  .quote-text {
-    color: #555;
-    font-size: 1.05em;
-  }
+  .quote-text { color: #555; font-size: 1.05em; }
+  .author { text-align: right; font-weight: bold; color: #4b6cb7; margin-top: 15px; }
 
-  .author {
-    text-align: right;
-    font-weight: bold;
-    color: #4b6cb7;
-    margin-top: 15px;
-  }
-
-  footer {
-    text-align: center;
-    margin-top: 40px;
-    padding-bottom: 40px;
-    font-size: 0.9em;
-    color: #555;
-  }
+  footer { text-align: center; margin-top: 40px; padding-bottom: 40px; font-size: 0.9em; color: #555; }
 </style>
 </head>
 
@@ -121,51 +147,71 @@
 <div class="container">
 
   <h1>2026 Time Capsule (BETA)</h1>
-  <div class="creator">
-    Creator: <strong>Ethan Francis Chan</strong>
-  </div>
+  <div class="creator">Creator: <strong>Ethan Francis Chan</strong></div>
 
-  <img src="https://images.unsplash.com/photo-1461360228754-6e81c478c882?auto=format&fit=crop&w=1000&q=80" alt="Time Capsule Visual" class="responsive-img">
+  <img src="https://images.unsplash.com/photo-1461360228754-6e81c478c882?auto=format&fit=crop&w=1000&q=80" alt="Time Capsule" class="responsive-img">
 
-  <p class="description">
-    A collection of messages, memories, and thoughts saved for the future.
-  </p>
-
-  <div class="section-box">
-    <h2>FAQ</h2>
-    <p>If there are any problems, message <strong>Ethan Francis Chan</strong> on Facebook.</p>
-  </div>
-
-  <div class="section-box">
-    <h2>Patron</h2>
-    <p>Created by <b>Ethan Francis Chan</b>. Supported by classmates and friends who helped test and improve this random project since I had nothing else to do.</p>
+  <div class="form-box">
+    <h2>Add Your Message</h2>
+    <div class="form-group">
+      <label for="userName">Your Name</label>
+      <input type="text" id="userName" placeholder="Enter your name...">
+    </div>
+    <div class="form-group">
+      <label for="userMessage">Your Message</label>
+      <textarea id="userMessage" rows="3" placeholder="Write something for the future..."></textarea>
+    </div>
+    <button onclick="addMessage()">Submit to Capsule</button>
   </div>
 
   <div class="section-box">
     <h2>Testers</h2>
-    <p>Adishree Shiloh</p>
-    <p>Alexis Blanche</p>
-    <p>Max Mercado</p>
+    <p>Adishree Shiloh | Alexis Blanche | Max Mercado</p>
   </div>
 
-  <div class="quotes-list">
+  <div class="quotes-list" id="capsuleGrid">
     <div class="quote-box"><p class="quote-text">"Life isn’t about waiting for the storm to pass; it’s about learning to dance in the rain."</p><p class="author">— Ethan Chan (Creator)</p></div>
     <div class="quote-box"><p class="quote-text">"Be grateful, your everyday life is someone's dream life."</p><p class="author">— Adishree Shiloh(Tester)</p></div>
     <div class="quote-box"><p class="quote-text">"I love Austin."</p><p class="author">— Max Mercado(Tester)</p></div>
     <div class="quote-box"><p class="quote-text">"I like turtles."</p><p class="author">— Alexis Blanche(Tester)</p></div>
-    <div class="quote-box"><p class="quote-text">"Let go and let God 💕"</p><p class="author">— Ica Guerrero</p></div>
-    <div class="quote-box"><p class="quote-text">"Paint your own picture, and don't be thrown off course by others 💞💞💞😍😍...🥺🥺🥺"</p><p class="author">— Eiunice Arca</p></div>
-    <div class="quote-box"><p class="quote-text">"I like boys"</p><p class="author">— Ramon Lacno</p></div>
-    <div class="quote-box"><p class="quote-text">"Everything is Everywhere"</p><p class="author">— Nino Roque</p></div>
-    <div class="quote-box"><p class="quote-text">"Life is Short. Spoil your Day"</p><p class="author">— Mertyl Ancajas</p></div>
-    <div class="quote-box"><p class="quote-text">"Take chances, make mistakes. Stay positive, keep moving."</p><p class="author">— Shantelle Ruta</p></div>
-  </div>
+    </div>
 
   <footer>
     Created by <strong>Ethan Francis Chan</strong> • 2026 Time Capsule Project
   </footer>
 
 </div>
+
+<script>
+  function addMessage() {
+    const name = document.getElementById('userName').value;
+    const message = document.getElementById('userMessage').value;
+
+    if (name === "" || message === "") {
+      alert("Please fill in both fields!");
+      return;
+    }
+
+    // Create the new quote box element
+    const newBox = document.createElement('div');
+    newBox.className = 'quote-box';
+    newBox.innerHTML = `
+      <p class="quote-text">"${message}"</p>
+      <p class="author">— ${name}</p>
+    `;
+
+    // Add it to the top of the grid
+    const grid = document.getElementById('capsuleGrid');
+    grid.insertBefore(newBox, grid.firstChild);
+
+    // Clear the form
+    document.getElementById('userName').value = "";
+    document.getElementById('userMessage').value = "";
+
+    // Smooth scroll to the new message
+    newBox.scrollIntoView({ behavior: 'smooth' });
+  }
+</script>
 
 </body>
 </html>
