@@ -26,308 +26,190 @@
     overflow-x: hidden;
   }
 
-  /* SIDE DECORATIONS - SPACESHIPS */
+  /* SIDE DECORATIONS - FLOATING SPACESHIPS */
   .side-panel {
     position: fixed;
     top: 50%;
     transform: translateY(-50%);
-    width: 150px;
-    opacity: 0.4;
+    width: 120px;
+    opacity: 0.3;
     pointer-events: none;
-    z-index: -1;
+    z-index: 10;
   }
-  .left-side { left: 20px; }
-  .right-side { right: 20px; }
+  .left-side { left: 10px; animation: float 6s ease-in-out infinite; }
+  .right-side { right: 10px; animation: float 8s ease-in-out infinite reverse; }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(-50%) translateX(0); }
+    50% { transform: translateY(-55%) translateX(10px); }
+  }
 
   .ship-silhouette {
     fill: none;
     stroke: var(--neon-blue);
     stroke-width: 1;
     filter: drop-shadow(0 0 5px var(--neon-blue));
-    margin-bottom: 50px;
+    margin-bottom: 60px;
+    display: block;
   }
 
   .container {
-    max-width: 900px;
+    max-width: 800px;
     margin: 0 auto;
     padding: 60px 20px;
     border-left: 1px solid var(--panel-border);
     border-right: 1px solid var(--panel-border);
-    background: rgba(0,0,0,0.4);
+    background: rgba(0,0,0,0.6);
+    position: relative;
+    z-index: 1;
   }
 
-  header {
-    text-align: center;
-    margin-bottom: 60px;
-  }
+  header { text-align: center; margin-bottom: 40px; }
 
   h1 {
     font-family: 'Orbitron', sans-serif;
-    font-size: 3em;
+    font-size: clamp(2em, 8vw, 3.5em);
     letter-spacing: 10px;
     color: var(--neon-blue);
     text-shadow: 0 0 15px var(--neon-blue);
     margin: 0;
   }
 
-  .system-status {
-    color: var(--neon-pink);
+  /* NEW RESPONSIVE VIEWPORTS (IMAGES) */
+  .viewport-frame {
+    border: 1px solid var(--neon-blue);
+    padding: 5px;
+    margin: 40px 0;
+    background: rgba(0, 243, 255, 0.05);
+    position: relative;
+  }
+
+  .viewport-frame::before {
+    content: "EXTERNAL_VIEW_CAM_" attr(data-cam);
+    position: absolute;
+    top: -10px; left: 10px;
     font-family: 'Orbitron';
-    font-size: 0.7em;
-    letter-spacing: 3px;
-    margin-top: 10px;
+    font-size: 0.6em;
+    color: var(--neon-blue);
+    background: var(--deep-space);
+    padding: 0 5px;
   }
 
-  /* THE MESSAGES GRID */
-  .archive-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
+  .responsive-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: brightness(0.7) contrast(1.2);
+    border-radius: 2px;
   }
 
+  /* LOG ENTRIES */
   .log-entry {
     background: rgba(255, 255, 255, 0.02);
     border: 1px solid var(--panel-border);
-    padding: 30px;
+    padding: 25px;
+    margin-bottom: 20px;
     position: relative;
-    clip-path: polygon(0 0, 95% 0, 100% 20%, 100% 100%, 5% 100%, 0 80%);
+    clip-path: polygon(0 0, 96% 0, 100% 15%, 100% 100%, 4% 100%, 0 85%);
   }
 
-  .log-entry:hover {
-    background: rgba(0, 243, 255, 0.05);
-    border-color: var(--neon-blue);
-  }
-
-  .log-entry::before {
-    content: "DECODED_LOG";
+  .log-entry::after {
+    content: "";
     position: absolute;
-    top: 5px;
-    left: 20px;
-    font-size: 0.6em;
-    color: var(--neon-pink);
-    font-family: 'Orbitron';
+    bottom: 0; right: 0;
+    width: 20px; height: 20px;
+    background: var(--neon-blue);
+    opacity: 0.2;
   }
 
-  .message {
-    font-size: 1.3em;
-    margin: 15px 0;
-    font-weight: 300;
-    color: #fff;
-  }
+  .message { font-size: 1.2em; margin: 10px 0; color: #fff; }
+  .sender { color: var(--neon-pink); font-family: 'Orbitron'; font-size: 0.7em; text-align: right; letter-spacing: 1px; }
 
-  .sender {
-    color: var(--neon-blue);
-    font-family: 'Orbitron';
-    font-size: 0.8em;
-    text-align: right;
-    border-top: 1px solid rgba(0, 243, 255, 0.1);
-    padding-top: 10px;
-  }
-
-  footer {
-    text-align: center;
-    margin-top: 80px;
-    font-size: 0.7em;
-    color: #444;
-    letter-spacing: 5px;
-  }
+  footer { text-align: center; margin-top: 60px; font-size: 0.7em; color: #444; letter-spacing: 3px; }
 </style>
 </head>
 
 <body>
 
 <div class="side-panel left-side">
-  <svg class="ship-silhouette" viewBox="0 0 100 100" width="100">
-    <path d="M50 10 L20 90 L50 70 L80 90 Z" />
-  </svg>
-  <svg class="ship-silhouette" viewBox="0 0 100 100" width="100" style="opacity: 0.5;">
-    <circle cx="50" cy="50" r="30" />
-    <path d="M10 50 L90 50 M50 10 L50 90" />
-  </svg>
+  <svg class="ship-silhouette" viewBox="0 0 100 100" width="80"><path d="M50 5 L10 90 L50 70 L90 90 Z" /></svg>
+  <svg class="ship-silhouette" viewBox="0 0 100 100" width="60" style="margin-left: 20px;"><path d="M10 50 L40 40 L90 50 L40 60 Z" /></svg>
 </div>
 
 <div class="side-panel right-side">
-  <svg class="ship-silhouette" viewBox="0 0 100 100" width="100">
-    <path d="M10 50 L40 40 L90 50 L40 60 Z" />
-  </svg>
-  <div style="font-family: 'Orbitron'; font-size: 0.5em; color: var(--neon-blue);">
-    COORD: 45.92.01<br>STATUS: DEPLOYED
-  </div>
+  <svg class="ship-silhouette" viewBox="0 0 100 100" width="70"><circle cx="50" cy="50" r="30" /><path d="M10 50 L90 50 M50 10 L50 90" /></svg>
+  <svg class="ship-silhouette" viewBox="0 0 100 100" width="80" style="margin-right: 20px;"><path d="M50 10 L20 80 L80 80 Z" /></svg>
 </div>
 
 <div class="container">
   <header>
     <h1>STATION_2026</h1>
-    <div class="system-status">>> READ_ONLY_PROTOCOL_ACTIVE <<</div>
+    <div style="color: var(--neon-blue); font-size: 0.8em;">>> ARCHIVE_OWNER: ETHAN_FRANCIS_CHAN <<</div>
   </header>
 
+  <div class="viewport-frame" data-cam="01">
+    <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1000&q=80" alt="Nebula" class="responsive-img">
+  </div>
+
   <div class="archive-grid">
-    
-    <div class="log-entry">
-      <div class="message">"Life isn’t about waiting for the storm to pass; it’s about learning to dance in the rain."</div>
-      <div class="sender">// ETHAN CHAN (ARCHIVIST)</div>
-    </div>
+    <div class="log-entry"><div class="message">"Life isn’t about waiting for the storm to pass..."</div><div class="sender">// ETHAN CHAN</div></div>
+    <div class="log-entry"><div class="message">"Be grateful, your everyday life is someone's dream life."</div><div class="sender">// ADISHREE SHILOH</div></div>
+    <div class="log-entry"><div class="message">"I love Austin."</div><div class="sender">// MAX MERCADO</div></div>
+    <div class="log-entry"><div class="message">"I like turtles."</div><div class="sender">// ALEXIS BLANCHE</div></div>
+    <div class="log-entry"><div class="message">"Let go and let God 💕"</div><div class="sender">// ICA GUERRERO</div></div>
+    <div class="log-entry"><div class="message">"Paint your own picture, and don't be thrown off course by others 💞"</div><div class="sender">// EIUNICE ARCA</div></div>
+    <div class="log-entry"><div class="message">"I like boys"</div><div class="sender">// RAMON LACNO</div></div>
+    <div class="log-entry"><div class="message">"Everything is Everywhere"</div><div class="sender">// NINO ROQUE</div></div>
+  </div>
 
-    <div class="log-entry">
-      <div class="message">"Be grateful, your everyday life is someone's dream life."</div>
-      <div class="sender">// ADISHREE SHILOH</div>
-    </div>
+  <div class="viewport-frame" data-cam="02">
+    <img src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=1000&q=80" alt="Satellite View" class="responsive-img">
+  </div>
 
-    <div class="log-entry">
-      <div class="message">"I love Austin."</div>
-      <div class="sender">// MAX MERCADO</div>
-    </div>
+  <div class="archive-grid">
+    <div class="log-entry"><div class="message">"Life is Short. Spoil your Day"</div><div class="sender">// MERTYL ANCAJAS</div></div>
+    <div class="log-entry"><div class="message">"Money is power. Toni Fowler oh yeah!"</div><div class="sender">// ALEXANDER TEMPLADO</div></div>
+    <div class="log-entry"><div class="message">"Eat 15 chicken nuggets today"</div><div class="sender">// HAAMIAH OSMENA</div></div>
+    <div class="log-entry"><div class="message">"Be grateful"</div><div class="sender">// AUDREY LAGUMBAY</div></div>
+    <div class="log-entry"><div class="message">"It always seems impossible until its done"</div><div class="sender">// YOHANN CELOCIA</div></div>
+    <div class="log-entry"><div class="message">"The only way to do great work is to love what you do"</div><div class="sender">// LYXIE REBLE</div></div>
+    <div class="log-entry"><div class="message">"Take chances, make mistakes. Stay positive, keep moving."</div><div class="sender">// SHANTELLE RUTA</div></div>
+  </div>
 
-    <div class="log-entry">
-      <div class="message">"I like turtles."</div>
-      <div class="sender">// ALEXIS BLANCHE</div>
-    </div>
+  <div class="viewport-frame" data-cam="03">
+    <img src="https://images.unsplash.com/photo-1506318137071-a8e063b4b519?auto=format&fit=crop&w=1000&q=80" alt="Galaxy" class="responsive-img">
+  </div>
 
-    <div class="log-entry">
-      <div class="message">"Let go and let God 💕"</div>
-      <div class="sender">// ICA GUERRERO</div>
-    </div>
+  <div class="archive-grid">
+    <div class="log-entry"><div class="message">"It wont happen in a hour, but if you quit it wont happen at all"</div><div class="sender">// SHAN BRIONE</div></div>
+    <div class="log-entry"><div class="message">"If I call while I charge then my battery will die..."</div><div class="sender">// YUIE EDILLO</div></div>
+    <div class="log-entry"><div class="message">"They boiled a dog and fed it to a child"</div><div class="sender">// SHENG HOPIDA</div></div>
+    <div class="log-entry"><div class="message">"Yeah IDK"</div><div class="sender">// ROB MAGLASANG</div></div>
+    <div class="log-entry"><div class="message">"Whats App!"</div><div class="sender">// LE MABULAY</div></div>
+    <div class="log-entry"><div class="message">"Pray, Hope, and Don't worry"</div><div class="sender">// JAZMIN ALBAR</div></div>
+    <div class="log-entry"><div class="message">"You can never change fate..."</div><div class="sender">// BRENT EQUIBAL</div></div>
+    <div class="log-entry"><div class="message">"Every cloud has a silver lining"</div><div class="sender">// MARTINA MODINA</div></div>
+  </div>
 
-    <div class="log-entry">
-      <div class="message">"Paint your own picture, and don't be thrown off course by others 💞"</div>
-      <div class="sender">// EIUNICE ARCA</div>
-    </div>
+  <div class="viewport-frame" data-cam="04">
+    <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=1000&q=80" alt="Deep Space" class="responsive-img">
+  </div>
 
-    <div class="log-entry">
-      <div class="message">"I like boys"</div>
-      <div class="sender">// RAMON LACNO</div>
-    </div>
-
-    <div class="log-entry">
-      <div class="message">"Everything is Everywhere"</div>
-      <div class="sender">// NINO ROQUE</div>
-    </div>
-
-    <div class="log-entry">
-      <div class="message">"Life is Short. Spoil your Day"</div>
-      <div class="sender">// MERTYL ANCAJAS</div>
-    </div>
-
-    <div class="log-entry">
-      <div class="message">"Money is power. Toni Fowler oh yeah!"</div>
-      <div class="sender">// ALEXANDER TEMPLADO</div>
-    </div>
-
-    <div class="log-entry">
-      <div class="message">"Eat 15 chicken nuggets today"</div>
-      <div class="sender">// HAAMIAH OSMENA</div>
-    </div>
-
-    <div class="log-entry">
-      <div class="message">"Be grateful"</div>
-      <div class="sender">// AUDREY LAGUMBAY</div>
-    </div>
-
-    <div class="log-entry">
-      <div class="message">"It always seems impossible until its done"</div>
-      <div class="sender">// YOHANN CELOCIA</div>
-    </div>
-
-    <div class="log-entry">
-      <div class="message">"The only way to do great work is to love what you do"</div>
-      <div class="sender">// LYXIE REBLE</div>
-    </div>
-
-    <div class="log-entry">
-      <div class="message">"Take chances, make mistakes. Stay positive, keep moving."</div>
-      <div class="sender">// SHANTELLE RUTA</div>
-    </div>
-
-    <div class="log-entry">
-      <div class="message">"It wont happen in a hour, but if you quit it wont happen at all"</div>
-      <div class="sender">// SHAN BRIONE</div>
-    </div>
-
-    <div class="log-entry">
-      <div class="message">"If I call while I charge then my battery will die..."</div>
-      <div class="sender">// YUIE EDILLO</div>
-    </div>
-
-    <div class="log-entry">
-      <div class="message">"They boiled a dog and fed it to a child"</div>
-      <div class="sender">// SHENG HOPIDA</div>
-    </div>
-
-    <div class="log-entry">
-      <div class="message">"Yeah IDK"</div>
-      <div class="sender">// ROB MAGLASANG</div>
-    </div>
-
-    <div class="log-entry">
-      <div class="message">"Whats App!"</div>
-      <div class="sender">// LE MABULAY</div>
-    </div>
-
-    <div class="log-entry">
-      <div class="message">"Pray, Hope, and Don't worry"</div>
-      <div class="sender">// JAZMIN ALBAR</div>
-    </div>
-
-    <div class="log-entry">
-      <div class="message">"You can never change fate..."</div>
-      <div class="sender">// BRENT EQUIBAL</div>
-    </div>
-
-    <div class="log-entry">
-      <div class="message">"Every cloud has a silver lining"</div>
-      <div class="sender">// MARTINA MODINA</div>
-    </div>
-
-    <div class="log-entry">
-      <div class="message">"Whatever you do, just make sure it makes you happy"</div>
-      <div class="sender">// ERLAINE GUMAPON</div>
-    </div>
-
-    <div class="log-entry">
-      <div class="message">"Every effort you make, marks a sharper version of you"</div>
-      <div class="sender">// ANGELICAH</div>
-    </div>
-
-    <div class="log-entry">
-      <div class="message">"Green Apple"</div>
-      <div class="sender">// BLAIR PAHNER</div>
-    </div>
-
-    <div class="log-entry">
-      <div class="message">"The past is history, the future is a mystery..."</div>
-      <div class="sender">// JASMINE CATALAN</div>
-    </div>
-
-    <div class="log-entry">
-      <div class="message">"Where did Odin get his gun?"</div>
-      <div class="sender">// MANUEL FELIPE</div>
-    </div>
-
-    <div class="log-entry">
-      <div class="message">"One larp two larp red larp blue larp"</div>
-      <div class="sender">// GABBY AREVALO</div>
-    </div>
-
-    <div class="log-entry">
-      <div class="message">"Dont be angry to anyone and be kind to everyone"</div>
-      <div class="sender">// FRANCIS JAMBOY</div>
-    </div>
-
-    <div class="log-entry">
-      <div class="message">"What is gone is still there..."</div>
-      <div class="sender">// NIKOLAI BAEL</div>
-    </div>
-
-
+  <div class="archive-grid">
+    <div class="log-entry"><div class="message">"Whatever you do, just make sure it makes you happy"</div><div class="sender">// ERLAINE GUMAPON</div></div>
+    <div class="log-entry"><div class="message">"Every effort you make, marks a sharper version of you"</div><div class="sender">// ANGELICAH</div></div>
+    <div class="log-entry"><div class="message">"Green Apple"</div><div class="sender">// BLAIR PAHNER</div></div>
+    <div class="log-entry"><div class="message">"The past is history, the future is a mystery..."</div><div class="sender">// JASMINE CATALAN</div></div>
+    <div class="log-entry"><div class="message">"Where did Odin get his gun?"</div><div class="sender">// MANUEL FELIPE</div></div>
+    <div class="log-entry"><div class="message">"One larp two larp red larp blue larp"</div><div class="sender">// GABBY AREVALO</div></div>
+    <div class="log-entry"><div class="message">"Dont be angry to anyone and be kind to everyone"</div><div class="sender">// FRANCIS JAMBOY</div></div>
+    <div class="log-entry"><div class="message">"What is gone is still there..."</div><div class="sender">// NIKOLAI BAEL</div></div>
   </div>
 
   <footer>
-    TIMELINE_ENCRYPTION_COMPLETE // 2026.02.28
+    PROTOCOL: FINAL_ARCHIVE_2026 // NO_FURTHER_ENTRIES
   </footer>
 </div>
 
 </body>
 </html>
-  
-
-
