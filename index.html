@@ -3,167 +3,169 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>TEMPORAL ARCHIVE // 2026</title>
+<title>STARSHIP ARCHIVE // 2026</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;600&display=swap" rel="stylesheet">
 
 <style>
   :root {
-    --cobalt: #0047ab;
     --neon-blue: #00f3ff;
-    --warning-orange: #ff9d00;
+    --neon-pink: #ff00ff;
     --deep-space: #020205;
+    --panel-border: rgba(0, 243, 255, 0.3);
   }
 
   body {
     background-color: var(--deep-space);
     background-image: 
-      linear-gradient(rgba(0, 243, 255, 0.05) 1px, transparent 1px),
-      linear-gradient(90px, rgba(0, 243, 255, 0.05) 1px, transparent 1px);
-    background-size: 50px 50px;
+      radial-gradient(circle at 2px 2px, rgba(255,255,255,0.05) 1px, transparent 0);
+    background-size: 40px 40px;
     color: #e0e0e0;
     font-family: 'Rajdhani', sans-serif;
     margin: 0;
-    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* SIDE DECORATIONS - SPACESHIPS */
+  .side-panel {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 150px;
+    opacity: 0.4;
+    pointer-events: none;
+    z-index: -1;
+  }
+  .left-side { left: 20px; }
+  .right-side { right: 20px; }
+
+  .ship-silhouette {
+    fill: none;
+    stroke: var(--neon-blue);
+    stroke-width: 1;
+    filter: drop-shadow(0 0 5px var(--neon-blue));
+    margin-bottom: 50px;
   }
 
   .container {
-    max-width: 1100px;
+    max-width: 900px;
     margin: 0 auto;
-    padding: 40px 20px;
+    padding: 60px 20px;
+    border-left: 1px solid var(--panel-border);
+    border-right: 1px solid var(--panel-border);
+    background: rgba(0,0,0,0.4);
   }
 
-  /* Header Section */
   header {
     text-align: center;
-    border: 2px solid var(--neon-blue);
-    padding: 20px;
-    background: rgba(0, 71, 171, 0.1);
-    box-shadow: 0 0 20px rgba(0, 243, 255, 0.2);
-    margin-bottom: 40px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  header::after {
-    content: "";
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 2px;
-    background: var(--neon-blue);
-    animation: scan 3s linear infinite;
-  }
-
-  @keyframes scan {
-    0% { top: 0; }
-    100% { top: 100%; }
+    margin-bottom: 60px;
   }
 
   h1 {
     font-family: 'Orbitron', sans-serif;
-    font-size: 3.5em;
-    margin: 0;
-    letter-spacing: 8px;
+    font-size: 3em;
+    letter-spacing: 10px;
     color: var(--neon-blue);
-    text-shadow: 0 0 10px var(--neon-blue);
+    text-shadow: 0 0 15px var(--neon-blue);
+    margin: 0;
   }
 
-  .status-bar {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 0.8em;
-    color: var(--warning-orange);
+  .system-status {
+    color: var(--neon-pink);
+    font-family: 'Orbitron';
+    font-size: 0.7em;
+    letter-spacing: 3px;
     margin-top: 10px;
   }
 
-  /* Image Styling */
-  .hero-frame {
-    border: 1px solid var(--neon-blue);
-    padding: 10px;
-    margin-bottom: 50px;
-    background: rgba(255,255,255,0.02);
-  }
-
-  .responsive-img {
-    width: 100%;
-    display: block;
-    filter: sepia(0.5) hue-rotate(180deg) brightness(0.8);
-    border-radius: 2px;
-  }
-
-  /* Grid Styling */
+  /* THE MESSAGES GRID */
   .archive-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
   }
 
   .log-entry {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(0, 243, 255, 0.2);
-    padding: 25px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--panel-border);
+    padding: 30px;
     position: relative;
-    transition: all 0.3s ease;
+    clip-path: polygon(0 0, 95% 0, 100% 20%, 100% 100%, 5% 100%, 0 80%);
   }
 
   .log-entry:hover {
     background: rgba(0, 243, 255, 0.05);
     border-color: var(--neon-blue);
-    transform: scale(1.02);
   }
 
   .log-entry::before {
-    content: "LOG_DATA";
+    content: "DECODED_LOG";
     position: absolute;
-    top: -10px; left: 10px;
-    background: var(--deep-space);
-    color: var(--neon-blue);
-    font-size: 0.7em;
+    top: 5px;
+    left: 20px;
+    font-size: 0.6em;
+    color: var(--neon-pink);
     font-family: 'Orbitron';
-    padding: 0 5px;
   }
 
   .message {
-    font-size: 1.2em;
-    margin-bottom: 15px;
+    font-size: 1.3em;
+    margin: 15px 0;
     font-weight: 300;
+    color: #fff;
   }
 
   .sender {
-    color: var(--warning-orange);
+    color: var(--neon-blue);
     font-family: 'Orbitron';
     font-size: 0.8em;
     text-align: right;
-    text-transform: uppercase;
-    letter-spacing: 2px;
+    border-top: 1px solid rgba(0, 243, 255, 0.1);
+    padding-top: 10px;
   }
 
   footer {
     text-align: center;
-    margin-top: 100px;
-    padding: 20px;
-    border-top: 1px solid rgba(0, 243, 255, 0.2);
-    color: #555;
-    font-size: 0.9em;
+    margin-top: 80px;
+    font-size: 0.7em;
+    color: #444;
+    letter-spacing: 5px;
   }
 </style>
 </head>
 
 <body>
 
+<div class="side-panel left-side">
+  <svg class="ship-silhouette" viewBox="0 0 100 100" width="100">
+    <path d="M50 10 L20 90 L50 70 L80 90 Z" />
+  </svg>
+  <svg class="ship-silhouette" viewBox="0 0 100 100" width="100" style="opacity: 0.5;">
+    <circle cx="50" cy="50" r="30" />
+    <path d="M10 50 L90 50 M50 10 L50 90" />
+  </svg>
+</div>
+
+<div class="side-panel right-side">
+  <svg class="ship-silhouette" viewBox="0 0 100 100" width="100">
+    <path d="M10 50 L40 40 L90 50 L40 60 Z" />
+  </svg>
+  <div style="font-family: 'Orbitron'; font-size: 0.5em; color: var(--neon-blue);">
+    COORD: 45.92.01<br>STATUS: DEPLOYED
+  </div>
+</div>
+
 <div class="container">
   <header>
-    <h1>ARCHIVE_2026</h1>
-    <div class="status-bar">SYSTEM_OWNER: ETHAN_FRANCIS_CHAN // TIMELINE_LOCKED</div>
+    <h1>STATION_2026</h1>
+    <div class="system-status">>> READ_ONLY_PROTOCOL_ACTIVE <<</div>
   </header>
 
-  <div class="hero-frame">
-    <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80" alt="Space Interface" class="responsive-img">
-  </div>
-
   <div class="archive-grid">
-
+    
     <div class="log-entry">
       <div class="message">"Life isn’t about waiting for the storm to pass; it’s about learning to dance in the rain."</div>
-      <div class="sender">// ETHAN CHAN (CREATOR)</div>
+      <div class="sender">// ETHAN CHAN (ARCHIVIST)</div>
     </div>
 
     <div class="log-entry">
@@ -319,9 +321,10 @@
   </div>
 
   <footer>
-    TEMPORAL_STAMP: 2026.02.28 // ARCHIVE_COMPLETE
+    TIMELINE_ENCRYPTION_COMPLETE // 2026.02.28
   </footer>
 </div>
 
 </body>
 </html>
+  
