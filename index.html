@@ -3,182 +3,208 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>2026 Time Capsule</title>
+<title>NEURAL CAPSULE // 2026</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
+  :root {
+    --neon-blue: #00f3ff;
+    --neon-pink: #ff00ff;
+    --dark-bg: #050505;
+    --glass: rgba(255, 255, 255, 0.05);
+  }
+
   body {
-    font-family: Arial, sans-serif;
+    background-color: var(--dark-bg);
+    background-image: radial-gradient(circle at 50% 50%, #1a1a2e 0%, #050505 100%);
+    color: #e0e0e0;
+    font-family: 'Rajdhani', sans-serif;
     margin: 0;
-    padding: 0;
-    background: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1350&q=80') no-repeat center center fixed;
-    background-size: cover;
-    color: #333;
   }
 
-  body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    background: rgba(240,244,248,0.85);
-    z-index: -1;
+  .container { max-width: 1000px; margin: 40px auto; padding: 0 20px; }
+
+  h1 {
+    font-family: 'Orbitron', sans-serif;
+    text-align: center;
+    font-size: 3em;
+    color: var(--neon-blue);
+    text-shadow: 0 0 15px var(--neon-blue);
+    margin-bottom: 0;
   }
 
-  .container {
-    max-width: 1000px;
-    margin: 40px auto;
-    padding: 0 20px;
+  .glitch-text {
+    text-align: center;
+    color: var(--neon-pink);
+    font-weight: bold;
+    letter-spacing: 5px;
+    margin-bottom: 30px;
   }
 
   .responsive-img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 15px;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
-    margin: 0 auto 30px auto;
-    display: block;
-  }
-
-  h1 {
-    text-align: center;
-    font-size: 2.6em;
-    color: #4b6cb7;
-    font-family: 'Playfair Display', serif;
-    letter-spacing: 1px;
-    margin-bottom: 5px;
-  }
-
-  .creator {
-    text-align: center;
-    font-size: 1em;
-    color: #555;
-    margin-bottom: 25px;
-  }
-
-  /* Form Styling */
-  .form-box {
-    background: #ffffff;
-    border-radius: 15px;
-    padding: 25px;
+    width: 100%;
+    max-height: 350px;
+    object-fit: cover;
+    border: 1px solid var(--neon-blue);
+    box-shadow: 0 0 20px rgba(0, 243, 255, 0.3);
     margin-bottom: 40px;
-    box-shadow: 0 8px 25px rgba(75, 108, 183, 0.2);
-    border: 2px solid #4b6cb7;
+  }
+
+  .form-box {
+    background: var(--glass);
+    border: 1px solid var(--neon-blue);
+    padding: 25px;
+    margin-bottom: 50px;
+    backdrop-filter: blur(5px);
   }
 
   input, textarea {
-    width: 100%;
+    background: rgba(0,0,0,0.7);
+    border: 1px solid var(--neon-pink);
+    color: white;
     padding: 12px;
     margin: 10px 0;
-    border: 1px solid #ddd;
-    border-radius: 8px;
+    width: 100%;
     box-sizing: border-box;
+    font-family: 'Rajdhani';
   }
 
   button {
-    background: #4b6cb7;
-    color: white;
-    padding: 12px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
+    background: var(--neon-blue);
+    color: black;
+    padding: 15px;
     width: 100%;
+    font-family: 'Orbitron';
     font-weight: bold;
+    cursor: pointer;
+    border: none;
+    text-transform: uppercase;
   }
 
-  /* Grid Styling */
+  h2 { font-family: 'Orbitron'; color: var(--neon-blue); border-bottom: 2px solid var(--neon-blue); padding-bottom: 10px; margin-top: 50px;}
+
   .quotes-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 20px;
   }
 
   .quote-box {
-    background: white;
-    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(0, 243, 255, 0.3);
     padding: 20px;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-    min-height: 150px;
+    transition: 0.3s;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
   }
 
-  .quote-text { color: #555; font-size: 1.05em; }
-  .author { text-align: right; font-weight: bold; color: #4b6cb7; margin-top: 15px; }
+  .quote-box:hover { border-color: var(--neon-pink); background: rgba(255, 0, 255, 0.05); }
 
-  footer { text-align: center; margin-top: 40px; padding-bottom: 40px; color: #555; }
+  .author { color: var(--neon-blue); text-align: right; font-weight: bold; margin-top: 15px; font-family: 'Orbitron'; font-size: 0.8em; }
+
+  footer { text-align: center; padding: 40px; color: #444; font-size: 0.8em; }
 </style>
 </head>
 
 <body>
 
 <div class="container">
-  <h1>2026 Time Capsule (BETA)</h1>
-  <div class="creator">Creator: <strong>Ethan Francis Chan</strong></div>
+  <h1>NEURAL CAPSULE</h1>
+  <div class="glitch-text">SYNCING_CORE_ARCHIVE...</div>
 
-  <img src="https://images.unsplash.com/photo-1461360228754-6e81c478c882?auto=format&fit=crop&w=1000&q=80" alt="Time Capsule" class="responsive-img">
+  <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80" alt="Cyber Grid" class="responsive-img">
 
   <div class="form-box">
-    <h2>Add Your Message</h2>
-    <input type="text" id="userName" placeholder="Your Name">
-    <textarea id="userMessage" rows="3" placeholder="Message for the future..."></textarea>
-    <button onclick="addMessage()">Submit to Capsule</button>
+    <h3 style="margin-top:0; color:var(--neon-pink)">> NEW_ENTRY_INITIALIZED</h3>
+    <input type="text" id="userName" placeholder="SUBJECT_IDENTIFIER">
+    <textarea id="userMessage" rows="3" placeholder="TRANSMIT_DATA_TO_2026..."></textarea>
+    <button id="submitBtn">EXECUTE UPLOAD</button>
   </div>
 
+  <h2>// NEURAL_STREAM (LIVE_DATABASE)</h2>
   <div class="quotes-list" id="capsuleGrid">
-    <div class="quote-box"><p class="quote-text">"Life isn’t about waiting for the storm to pass; it’s about learning to dance in the rain."</p><p class="author">— Ethan Chan (Creator)</p></div>
-    <div class="quote-box"><p class="quote-text">"Be grateful, your everyday life is someone's dream life."</p><p class="author">— Adishree Shiloh(Tester)</p></div>
-    <div class="quote-box"><p class="quote-text">"I love Austin."</p><p class="author">— Max Mercado(Tester)</p></div>
-    <div class="quote-box"><p class="quote-text">"I like turtles."</p><p class="author">— Alexis Blanche(Tester)</p></div>
-    <div class="quote-box"><p class="quote-text">"Let go and let God 💕"</p><p class="author">— Ica Guerrero</p></div>
-    <div class="quote-box"><p class="quote-text">"Paint your own picture, and don't be thrown off course by others 💞💞💞"</p><p class="author">— Eiunice Arca</p></div>
-    <div class="quote-box"><p class="quote-text">"I like boys"</p><p class="author">— Ramon Lacno</p></div>
-    <div class="quote-box"><p class="quote-text">"Everything is Everywhere"</p><p class="author">— Nino Roque</p></div>
-    <div class="quote-box"><p class="quote-text">"Life is Short. Spoil your Day"</p><p class="author">— Mertyl Ancajas</p></div>
-    <div class="quote-box"><p class="quote-text">"Money is power. Toni Fowler oh yeah!"</p><p class="author">— Alexander Templado</p></div>
-    <div class="quote-box"><p class="quote-text">"Eat 15 chicken nuggets today"</p><p class="author">— Haamiah Osmena</p></div>
-    <div class="quote-box"><p class="quote-text">"Be grateful"</p><p class="author">— Audrey Lagumbay</p></div>
-    <div class="quote-box"><p class="quote-text">"It always seems impossible until its done"</p><p class="author">— Yohann Celocia</p></div>
-    <div class="quote-box"><p class="quote-text">"The only way to do great work is to love what you do"</p><p class="author">— Lyxie Reble</p></div>
-    <div class="quote-box"><p class="quote-text">"Take chances, make mistakes."</p><p class="author">— Shantelle Ruta</p></div>
-    <div class="quote-box"><p class="quote-text">"It wont happen in a hour, but if you quit it wont happen at all"</p><p class="author">— Shan Brione</p></div>
-    <div class="quote-box"><p class="quote-text">"If I call while I charge then my battery will die"</p><p class="author">— Yuie Edillo</p></div>
-    <div class="quote-box"><p class="quote-text">"They boiled a dog and fed it to a child"</p><p class="author">— Sheng Hopida</p></div>
-    <div class="quote-box"><p class="quote-text">"Yeah IDK"</p><p class="author">— Rob Maglasang</p></div>
-    <div class="quote-box"><p class="quote-text">"Whats App!"</p><p class="author">— Le Mabulay</p></div>
-    <div class="quote-box"><p class="quote-text">"Pray, Hope, and Don't worry"</p><p class="author">— Jazmin Albar</p></div>
-    <div class="quote-box"><p class="quote-text">"You can never change fate..."</p><p class="author">— Brent Equibal</p></div>
-    <div class="quote-box"><p class="quote-text">"Every cloud has a silver lining"</p><p class="author">— Martina Modina</p></div>
-    <div class="quote-box"><p class="quote-text">"Whatever you do, just make sure it makes you happy"</p><p class="author">— Erlaine Gumapon</p></div>
-    <div class="quote-box"><p class="quote-text">"Every effort you make, marks a sharper version of you"</p><p class="author">— Angelicah</p></div>
-    <div class="quote-box"><p class="quote-text">"Green Apple"</p><p class="author">— Blair Pahner</p></div>
-    <div class="quote-box"><p class="quote-text">"The past is history, the future is a mystery..."</p><p class="author">— Jasmine Catalan</p></div>
-    <div class="quote-box"><p class="quote-text">"Where did Odin get his gun?"</p><p class="author">— Manuel Felipe</p></div>
-    <div class="quote-box"><p class="quote-text">"One larp two larp red larp blue larp"</p><p class="author">— Gabby Arevalo</p></div>
-    <div class="quote-box"><p class="quote-text">"Dont be angry to anyone and be kind to everyone"</p><p class="author">— Francis Jamboy</p></div>
-    <div class="quote-box"><p class="quote-text">"What is gone is still there..."</p><p class="author">— Nikolai Bael</p></div>
+    </div>
+
+  <h2>// LEGACY_ARCHIVE (ORIGINAL_TIMELINE)</h2>
+  <div class="quotes-list">
+    <div class="quote-box"><p>"Life isn’t about waiting for the storm to pass..."</p><p class="author">— Ethan Chan (Creator)</p></div>
+    <div class="quote-box"><p>"Be grateful, your everyday life is someone's dream life."</p><p class="author">— Adishree Shiloh</p></div>
+    <div class="quote-box"><p>"I love Austin."</p><p class="author">— Max Mercado</p></div>
+    <div class="quote-box"><p>"I like turtles."</p><p class="author">— Alexis Blanche</p></div>
+    <div class="quote-box"><p>"Let go and let God 💕"</p><p class="author">— Ica Guerrero</p></div>
+    <div class="quote-box"><p>"Paint your own picture, and don't be thrown off course by others 💞"</p><p class="author">— Eiunice Arca</p></div>
+    <div class="quote-box"><p>"I like boys"</p><p class="author">— Ramon Lacno</p></div>
+    <div class="quote-box"><p>"Everything is Everywhere"</p><p class="author">— Nino Roque</p></div>
+    <div class="quote-box"><p>"Life is Short. Spoil your Day"</p><p class="author">— Mertyl Ancajas</p></div>
+    <div class="quote-box"><p>"Money is power. Toni Fowler oh yeah!"</p><p class="author">— Alexander Templado</p></div>
+    <div class="quote-box"><p>"Eat 15 chicken nuggets today"</p><p class="author">— Haamiah Osmena</p></div>
+    <div class="quote-box"><p>"Be grateful"</p><p class="author">— Audrey Lagumbay</p></div>
+    <div class="quote-box"><p>"It always seems impossible until its done"</p><p class="author">— Yohann Celocia</p></div>
+    <div class="quote-box"><p>"The only way to do great work is to love what you do"</p><p class="author">— Lyxie Reble</p></div>
+    <div class="quote-box"><p>"Take chances, make mistakes. Stay positive, keep moving."</p><p class="author">— Shantelle Ruta</p></div>
+    <div class="quote-box"><p>"It wont happen in a hour, but if you quit it wont happen at all"</p><p class="author">— Shan Brione</p></div>
+    <div class="quote-box"><p>"If I call while I charge then my battery will die..."</p><p class="author">— Yuie Edillo</p></div>
+    <div class="quote-box"><p>"They boiled a dog and fed it to a child"</p><p class="author">— Sheng Hopida</p></div>
+    <div class="quote-box"><p>"Yeah IDK"</p><p class="author">— Rob Maglasang</p></div>
+    <div class="quote-box"><p>"Whats App!"</p><p class="author">— Le Mabulay</p></div>
+    <div class="quote-box"><p>"Pray, Hope, and Don't worry"</p><p class="author">— Jazmin Albar</p></div>
+    <div class="quote-box"><p>"You can never change fate..."</p><p class="author">— Brent Equibal</p></div>
+    <div class="quote-box"><p>"Every cloud has a silver lining"</p><p class="author">— Martina Modina</p></div>
+    <div class="quote-box"><p>"Whatever you do, just make sure it makes you happy"</p><p class="author">— Erlaine Gumapon</p></div>
+    <div class="quote-box"><p>"Every effort you make, marks a sharper version of you"</p><p class="author">— Angelicah</p></div>
+    <div class="quote-box"><p>"Green Apple"</p><p class="author">— Blair Pahner</p></div>
+    <div class="quote-box"><p>"The past is history, the future is a mystery..."</p><p class="author">— Jasmine Catalan</p></div>
+    <div class="quote-box"><p>"Where did Odin get his gun?"</p><p class="author">— Manuel Felipe</p></div>
+    <div class="quote-box"><p>"One larp two larp red larp blue larp"</p><p class="author">— Gabby Arevalo</p></div>
+    <div class="quote-box"><p>"Dont be angry to anyone and be kind to everyone"</p><p class="author">— Francis Jamboy</p></div>
+    <div class="quote-box"><p>"What is gone is still there..."</p><p class="author">— Nikolai Bael</p></div>
   </div>
 
-  <footer>Created by Ethan Francis Chan • 2026 Time Capsule</footer>
+  <footer>SYSTEM_LOG: ETHAN_FRANCIS_CHAN // 2026_TIME_CAPSULE</footer>
 </div>
 
 <script>
-  function addMessage() {
+  // YOUR SUPABASE CONNECTION
+  const SUPABASE_URL = 'https://cxlpzigjihsmpxeaovrp.supabase.co'; 
+  const SUPABASE_KEY = 'PASTE_YOUR_ANON_KEY_HERE'; 
+  const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+  const grid = document.getElementById('capsuleGrid');
+  const btn = document.getElementById('submitBtn');
+
+  async function fetchMessages() {
+    const { data, error } = await supabaseClient.from('messages').select('*').order('created_at', { ascending: false });
+    if (!error) {
+      grid.innerHTML = ''; 
+      data.forEach(row => {
+        const box = document.createElement('div');
+        box.className = 'quote-box';
+        box.innerHTML = `<p>${row.message}</p><div class="author">// ID: ${row.name}</div>`;
+        grid.appendChild(box);
+      });
+    }
+  }
+
+  btn.addEventListener('click', async () => {
     const name = document.getElementById('userName').value;
     const message = document.getElementById('userMessage').value;
-    if (!name || !message) return alert("Fill everything!");
+    if (!name || !message) return alert("ERROR: NULL_DATA");
 
-    const newBox = document.createElement('div');
-    newBox.className = 'quote-box';
-    newBox.innerHTML = `<p class="quote-text">"${message}"</p><p class="author">— ${name}</p>`;
-    
-    const grid = document.getElementById('capsuleGrid');
-    grid.insertBefore(newBox, grid.firstChild);
-    
-    document.getElementById('userName').value = "";
-    document.getElementById('userMessage').value = "";
-  }
+    btn.innerText = "UPLOADING...";
+    const { error } = await supabaseClient.from('messages').insert([{ name, message }]);
+    if (error) alert("CRITICAL_FAILURE: " + error.message);
+    else {
+      document.getElementById('userName').value = '';
+      document.getElementById('userMessage').value = '';
+      fetchMessages(); 
+    }
+    btn.innerText = "EXECUTE UPLOAD";
+  });
+
+  fetchMessages();
 </script>
 </body>
 </html>
