@@ -12,6 +12,7 @@
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    /* This background is already responsive via 'background-size: cover' */
     background: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1350&q=80') no-repeat center center fixed;
     background-size: cover;
     color: #333;
@@ -29,6 +30,16 @@
     max-width: 1000px;
     margin: 40px auto;
     padding: 0 20px;
+  }
+
+  /* --- NEW RESPONSIVE IMAGE CLASS --- */
+  .responsive-img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    margin: 20px 0;
+    display: block;
   }
 
   h1 {
@@ -98,6 +109,7 @@
   footer {
     text-align: center;
     margin-top: 40px;
+    padding-bottom: 40px;
     font-size: 0.9em;
     color: #555;
   }
@@ -112,6 +124,8 @@
   <div class="creator">
     Creator: <strong>Ethan Francis Chan</strong>
   </div>
+
+  <img src="https://images.unsplash.com/photo-1461360228754-6e81c478c882?auto=format&fit=crop&w=1000&q=80" alt="Time Capsule Visual" class="responsive-img">
 
   <p class="description">
     A collection of messages, memories, and thoughts saved for the future.
@@ -135,81 +149,16 @@
   </div>
 
   <div class="quotes-list">
-
-    <!-- BOXES 1–50 -->
-  
-   
-   
-
-      <!-- 4 -->
-    
     <div class="quote-box"><p class="quote-text">"Life isn’t about waiting for the storm to pass; it’s about learning to dance in the rain."</p><p class="author">— Ethan Chan (Creator)</p></div>
     <div class="quote-box"><p class="quote-text">"Be grateful, your everyday life is someone's dream life."</p><p class="author">— Adishree Shiloh(Tester)</p></div>
     <div class="quote-box"><p class="quote-text">"I love Austin."</p><p class="author">— Max Mercado(Tester)</p></div>
     <div class="quote-box"><p class="quote-text">"I like turtles."</p><p class="author">— Alexis Blanche(Tester)</p></div>
     <div class="quote-box"><p class="quote-text">"Let go and let God 💕"</p><p class="author">— Ica Guerrero</p></div>
-    <div class="quote-box"><p class="quote-text">"Paint your own picture, and don't be thrown off course by others 💞💞💞😍😍😍🥺🥺🥺"</p><p class="author">— Eiunice Arca</p></div>
+    <div class="quote-box"><p class="quote-text">"Paint your own picture, and don't be thrown off course by others 💞💞💞😍😍...🥺🥺🥺"</p><p class="author">— Eiunice Arca</p></div>
     <div class="quote-box"><p class="quote-text">"I like boys"</p><p class="author">— Ramon Lacno</p></div>
     <div class="quote-box"><p class="quote-text">"Everything is Everywhere"</p><p class="author">— Nino Roque</p></div>
-
-    <!-- 9 -->
     <div class="quote-box"><p class="quote-text">"Life is Short. Spoil your Day"</p><p class="author">— Mertyl Ancajas</p></div>
-    <div class="quote-box"><p class="quote-text">"Sabi nga nila diba, what is money paper? Only, ah baka Q para sainyo pero para saakin money is power. Toni Fowler oh yeah!"</p><p class="author">— Alexander Templado</p></div>
-    <div class="quote-box"><p class="quote-text">"Eat 15 chicken nuggets today"</p><p class="author">— Haamiah Osmena</p></div>
-    <div class="quote-box"><p class="quote-text">"Be grateful"</p><p class="author">— Audrey Lagumbay</p></div>
-    <div class="quote-box"><p class="quote-text">"It always seems impossible until its done"</p><p class="author">— Yohann Celocia</p></div>
-
-    <!-- 14 -->
-    <div class="quote-box"><p class="quote-text">"The only way to do great work is to love what you do"</p><p class="author">— Lyxie Reble</p></div>
     <div class="quote-box"><p class="quote-text">"Take chances, make mistakes. Stay positive, keep moving."</p><p class="author">— Shantelle Ruta</p></div>
-    <div class="quote-box"><p class="quote-text">"It wont happen in a hour, but if you quit it wont happen at all"</p><p class="author">— Shan Brione</p></div>
-    <div class="quote-box"><p class="quote-text">"If I call while I charge then my battery will die then we can't call anymore"</p><p class="author">— Yuie Edillo</p></div>
-    <div class="quote-box"><p class="quote-text">"They boiled a dog and fed it to a child"</p><p class="author">— Sheng Hopida</p></div>
-
-    <!-- 19 -->
-    <div class="quote-box"><p class="quote-text">"Yeah IDK"</p><p class="author">— Rob Maglasang</p></div>
-    <div class="quote-box"><p class="quote-text">"Whats App!"</p><p class="author">— Le Mabulay</p></div>
-    <div class="quote-box"><p class="quote-text">"Pray, Hope, and Don't worry"</p><p class="author">— Jazmin Albar</p></div>
-    <div class="quote-box"><p class="quote-text">"You can never change fate, even if you think you have everything planned out and locked in"</p><p class="author">— Brent Equibal</p></div>
-    <div class="quote-box"><p class="quote-text">"Every cloud has a silver lining"</p><p class="author">— Martina Modina</p></div>
-
-    <!-- 24 -->
-    <div class="quote-box"><p class="quote-text">"Whatever you do, just make sure it makes you happy"</p><p class="author">— Erlaine Gumapon</p></div>
-    <div class="quote-box"><p class="quote-text">"Even when school feels hard, remember that every effort you make, marks a sharper and stronger version of you"</p><p class="author">— Angelicah </p></div>
-    <div class="quote-box"><p class="quote-text">"Green Apple"</p><p class="author">— Blair Pahner</p></div>
-    <div class="quote-box"><p class="quote-text">"The past is history,the future is a mystery,today is a gift that's why it's called present"</p><p class="author">— Jasmine Catalan</p></div>
-    <div class="quote-box"><p class="quote-text">"Where did Odin din din din dun get his gun?"</p><p class="author">— Manuel Felipe</p></div>
-
-    <!-- 29 -->
-    <div class="quote-box"><p class="quote-text">"One larp two larp red larp blue larp"</p><p class="author">— Gabby Arevalo</p></div>
-    <div class="quote-box"><p class="quote-text">"Dont be angry to anyone and be kind to everyone"</p><p class="author">— Francis Jamboy</p></div>
-    <div class="quote-box"><p class="quote-text">"What is gone is still there. While our lives are short, our deeds will forever stay."</p><p class="author">— Nikolai Bael</p></div>
-    <div class="quote-box"><p class="quote-text">"Tell me your message."</p><p class="author">— Name</p></div>
-    <div class="quote-box"><p class="quote-text">"Tell me your message."</p><p class="author">— Name</p></div>
-
-    <!-- 34 -->
-    <div class="quote-box"><p class="quote-text">"Tell me your message."</p><p class="author">— Name</p></div>
-    <div class="quote-box"><p class="quote-text">"Tell me your message."</p><p class="author">— Name</p></div>
-    <div class="quote-box"><p class="quote-text">"Tell me your message."</p><p class="author">— Name</p></div>
-    <div class="quote-box"><p class="quote-text">"Tell me your message."</p><p class="author">— Name</p></div>
-    <div class="quote-box"><p class="quote-text">"Tell me your message."</p><p class="author">— Name</p></div>
-
-    <!-- 39 -->
-    <div class="quote-box"><p class="quote-text">"Tell me your message."</p><p class="author">— Name</p></div>
-    <div class="quote-box"><p class="quote-text">"Tell me your message."</p><p class="author">— Name</p></div>
-    <div class="quote-box"><p class="quote-text">"Tell me your message."</p><p class="author">— Name</p></div>
-    <div class="quote-box"><p class="quote-text">"Tell me your message."</p><p class="author">— Name</p></div>
-    <div class="quote-box"><p class="quote-text">"Tell me your message."</p><p class="author">— Name</p></div>
-
-    <!-- 44–50 -->
-    <div class="quote-box"><p class="quote-text">"Tell me your message."</p><p class="author">— Name</p></div>
-    <div class="quote-box"><p class="quote-text">"Tell me your message."</p><p class="author">— Name</p></div>
-    <div class="quote-box"><p class="quote-text">"Tell me your message."</p><p class="author">— Name</p></div>
-    <div class="quote-box"><p class="quote-text">"Tell me your message."</p><p class="author">— Name</p></div>
-    <div class="quote-box"><p class="quote-text">"Tell me your message."</p><p class="author">— Name</p></div>
-    <div class="quote-box"><p class="quote-text">"Tell me your message."</p><p class="author">— Name</p></div>
-    <div class="quote-box"><p class="quote-text">""</p><p class="author">— Name</p></div>
-
   </div>
 
   <footer>
@@ -220,6 +169,3 @@
 
 </body>
 </html>
-
-
-
